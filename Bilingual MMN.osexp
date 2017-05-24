@@ -43,6 +43,17 @@ define keyboard_response answer
 	set description "Collects keyboard responses"
 	set allowed_responses space
 
+define synth beep
+	set volume 1
+	set pan 0
+	set osc sine
+	set length 100
+	set freq 1000
+	set duration sound
+	set description "A basic sound synthesizer"
+	set decay 5
+	set attack 5
+
 define sketchpad blank
 	set duration 500
 	set description "Displays stimuli"
@@ -92,7 +103,7 @@ define loop letters
 	set repeat 5
 	set order random
 	set description "Repeatedly runs another item"
-	set cycles 2
+	set cycles 4
 	set continuous no
 	set break_if_on_first yes
 	set break_if never
@@ -105,6 +116,7 @@ define loop letters
 	setcycle 0 letter7 X
 	setcycle 0 target 1
 	setcycle 0 correct_response space
+	setcycle 0 distractor 1
 	setcycle 1 letter1 H
 	setcycle 1 letter2 K
 	setcycle 1 letter3 M
@@ -114,6 +126,27 @@ define loop letters
 	setcycle 1 letter7 Z
 	setcycle 1 target 0
 	setcycle 1 correct_response ""
+	setcycle 1 distractor 1
+	setcycle 2 letter1 H
+	setcycle 2 letter2 K
+	setcycle 2 letter3 M
+	setcycle 2 letter4 N
+	setcycle 2 letter5 V
+	setcycle 2 letter6 W
+	setcycle 2 letter7 X
+	setcycle 2 target 1
+	setcycle 2 correct_response space
+	setcycle 2 distractor 0
+	setcycle 3 letter1 H
+	setcycle 3 letter2 K
+	setcycle 3 letter3 M
+	setcycle 3 letter4 N
+	setcycle 3 letter5 V
+	setcycle 3 letter6 W
+	setcycle 3 letter7 Z
+	setcycle 3 target 0
+	setcycle 3 correct_response ""
+	setcycle 3 distractor 0
 	shuffle_horiz letter1 letter2 letter3 letter4 letter5 letter6 letter7
 	run trial
 
@@ -135,6 +168,7 @@ define sequence trial
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run blank always
+	run beep "[distractor]==1"
 	run stimulus always
 	run answer always
 	run evaluation always
