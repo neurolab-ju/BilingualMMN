@@ -1,0 +1,125 @@
+---
+API: 2
+OpenSesame: 3.1.6
+Platform: nt
+---
+set width 1024
+set uniform_coordinates yes
+set title "Bilingual Mismatch Negativity"
+set subject_parity even
+set subject_nr 0
+set start experiment
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend legacy
+set round_decimals 2
+set mouse_backend xpyriment
+set keyboard_backend legacy
+set height 768
+set fullscreen no
+set form_clicks no
+set foreground white
+set font_underline no
+set font_size 18
+set font_italic no
+set font_family mono
+set font_bold no
+set disable_garbage_collection yes
+set description "Adaptation of audio-visual MMN paradigm in bilingual neuropsychology research"
+set coordinates uniform
+set compensation 0
+set color_backend legacy
+set clock_backend legacy
+set canvas_backend xpyriment
+set bidi no
+set background black
+
+define keyboard_response answer
+	set timeout 3000
+	set flush yes
+	set duration keypress
+	set description "Collects keyboard responses"
+	set allowed_responses space
+
+define sketchpad blank
+	set duration 500
+	set description "Displays stimuli"
+	draw fixdot color=white show_if=always style=default x=0 y=0 z_index=0
+
+define inline_script evaluation
+	set description "Executes Python code"
+	___run__
+	if var.response_answer == "space" and var.target == 0:
+		var.correct = 0
+	__end__
+	set _prepare ""
+
+define sequence experiment
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run letters always
+
+define feedback feedback
+	set reset_variables yes
+	set duration 1000
+	set description "Provides feedback to the participant"
+	draw fixdot color=green show_if="[correct]==1" style=default x=0 y=0 z_index=0
+	draw fixdot color=red show_if="[correct]==0" style=default x=0 y=0 z_index=0
+
+define loop letters
+	set source_file ""
+	set source table
+	set repeat 5
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 2
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 letter1 H
+	setcycle 0 letter2 K
+	setcycle 0 letter3 M
+	setcycle 0 letter4 N
+	setcycle 0 letter5 V
+	setcycle 0 letter6 W
+	setcycle 0 letter7 X
+	setcycle 0 target 1
+	setcycle 0 correct_response space
+	setcycle 1 letter1 H
+	setcycle 1 letter2 K
+	setcycle 1 letter3 M
+	setcycle 1 letter4 N
+	setcycle 1 letter5 V
+	setcycle 1 letter6 W
+	setcycle 1 letter7 Z
+	setcycle 1 target 0
+	setcycle 1 correct_response ""
+	shuffle_horiz letter1 letter2 letter3 letter4 letter5 letter6 letter7
+	run trial
+
+define logger logfile
+	set description "Logs experimental data"
+	set auto_log yes
+
+define sketchpad stimulus
+	set duration 0
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=38 html=yes show_if=always text="[letter1]" x=10 y=-234 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=38 html=yes show_if=always text="[letter2]" x=224 y=-128 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=38 html=yes show_if=always text="[letter3]" x=224 y=96 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=38 html=yes show_if=always text="[letter4]" x=-224 y=96 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=38 html=yes show_if=always text="[letter5]" x=0 y=234 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=38 html=yes show_if=always text="[letter6]" x=-224 y=-128 z_index=0
+
+define sequence trial
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run blank always
+	run stimulus always
+	run answer always
+	run evaluation always
+	run feedback always
+	run logfile always
+
