@@ -1,4 +1,4 @@
-#Neuropsychologický výzkum bilingvních
+# Neuropsychologický výzkum bilingvních
 
 *Szychowska, M. (Ed.). (2016). Effects of sound pressure level and visual perceptual load on the auditory mismatch negativity. Neuroscience letters, 640(2017), 37-41.*
 
