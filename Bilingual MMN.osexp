@@ -26,6 +26,7 @@ set font_size 18
 set font_italic no
 set font_family mono
 set font_bold no
+set experiment_path "\\\\Mac\\Home\\Documents\\GitHub\\BilingualMMN"
 set disable_garbage_collection yes
 set description "Adaptation of audio-visual MMN paradigm in bilingual neuropsychology research"
 set coordinates uniform
@@ -37,7 +38,7 @@ set bidi no
 set background black
 
 define keyboard_response answer
-	set timeout 3000
+	set timeout 1000
 	set flush yes
 	set duration keypress
 	set description "Collects keyboard responses"
@@ -47,7 +48,7 @@ define synth beep
 	set volume 1
 	set pan 0
 	set osc sine
-	set length 100
+	set length 50
 	set freq 1000
 	set duration sound
 	set description "A basic sound synthesizer"
