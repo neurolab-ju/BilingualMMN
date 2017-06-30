@@ -77,13 +77,9 @@ def buildblock():
     125 trials sequences of two different
     complexity.
     """
-    low_complexity = buildsequence(sequence, 0)
-    high_complexity = buildsequence(sequence, 1)
+    source_data = buildsequence(sequence, 1)
     
-    final_block = []
-    final_block.extend(low_complexity)
-    final_block.extend(high_complexity)
-    return final_block
+    return source_data
 
     
 def writeblock(final_block):
@@ -96,7 +92,7 @@ def writeblock(final_block):
                                                         "Letter3", "Letter4",
                                                         "Letter5", "Letter6",
                                                         "Type", "Complexity"])
-    block_df.to_csv("Final block sequence.csv", index=False, header=True)    
+    block_df.to_csv("Source2.csv", index=False, header=True)    
     
                 
 if __name__ == "__main__":
