@@ -27,3 +27,16 @@
 -	před prvním blokem si účastníci vyzkouší příslušný úkol (nízkou či vysokou zátěž) dokud si nejsou jisti, že je zadání zcela jasné 
 -	na začátku každého bloku je 5 - 8 neodpověďových úkolů, zároveň s prezentací standardních tónů (ty nejsou analyzovány)        
 
+## EEG značky
+EEG značky se posílají před spuštěním vizuální stimulace (onset) a při odpovědi.
+
+| Událost                    | Značka    |
+|----------------------------|-----------|
+| Standardní bez distraktoru | 1         |
+| Standardní s distraktorem  | 2         |
+| Deviantní bez distraktoru  | 3         |
+| Deviantní s distraktorem   | 4         |
+| Správná odpověď            | +100      |
+| Špatná odpověď             | +200      |
+
+U odpovědních značek se vždy přičitá k předchozí hodnotě značky, to znamená - pokud daný subjekt viděl standardní podnět s distraktorním tńem, poslala se při stimulaci značka 2. Pokud ospověděl správně bude odpovědní značka 102 (2 + 100), pokud odpověděl špatně 202 (2 + 200).
